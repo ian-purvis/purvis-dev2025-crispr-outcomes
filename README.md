@@ -2,7 +2,10 @@
 
 Purvis Dev 2025 CRISPR editing outcomes analysis. It uses the `CrispRVariants` package to analyze CRISPR editing outcomes from paired-end sequencing data. Amplicon sequencing data is used to assess the efficiency of CRISPR editing at a specific target region in the mouse genome.
 
-## Status: In Progress
+Data from this analysis is included in the following publication:
+https://journals.biologists.com/dev/article/153/6/dev204881/371171/A-robust-cis-regulatory-network-ensures-Otx2
+
+## Status: Completed
 
 Start Date: 2025-07-30
 
