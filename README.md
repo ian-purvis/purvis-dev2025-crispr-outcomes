@@ -107,7 +107,9 @@ Investigator Copy:
 
 ### Summary
 
+
 ### Publication
+https://journals.biologists.com/dev/article/153/6/dev204881/371171/A-robust-cis-regulatory-network-ensures-Otx2
 
 ### GEO Submission
 
