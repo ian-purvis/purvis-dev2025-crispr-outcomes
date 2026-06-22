@@ -1,6 +1,6 @@
 # purvis-dev2025-crispr-outcomes
 
-Canonical repository for the [`CrispRVariants`](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) amplicon-seq pipeline used in the Purvis *Development* 2025 *Otx2* study. P0 mouse retinas were electroporated with conventional CRISPR plasmids; FACS-sorted genomic DNA was PCR-amplified across guide sites and sequenced to quantify indel spectra.
+Canonical repository for the [`CrispRVariants`](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) amplicon-seq pipeline used in the the following manuscript. P0 mouse retinas were electroporated with conventional CRISPR plasmids; FACS-sorted genomic DNA was PCR-amplified across guide sites and sequenced to quantify indel spectra.
 
 **Purvis IJ, Ochoa Olmos OE, Park KU, Kaufman ML, Henry CM, Schaaf C, Clise OJ, Tesdahl CD, Haas A, Brzezinski JA IV.** A robust cis-regulatory network ensures *Otx2* expression during retinal development. *Development* **153**, dev204881 (2026).  
 [https://doi.org/10.1242/dev.204881](https://doi.org/10.1242/dev.204881)
