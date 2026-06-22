@@ -1,124 +1,82 @@
 # purvis-dev2025-crispr-outcomes
 
-Purvis Dev 2025 CRISPR editing outcomes analysis. It uses the `CrispRVariants` package to analyze CRISPR editing outcomes from single- and paired-end sequencing data. Amplicon sequencing data is used to assess the efficiency of CRISPR editing at a specific target region in the mouse genome.
+Canonical repository for the [`CrispRVariants`](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html) amplicon-seq pipeline used in the Purvis *Development* 2025 *Otx2* study. P0 mouse retinas were electroporated with conventional CRISPR plasmids; FACS-sorted genomic DNA was PCR-amplified across guide sites and sequenced to quantify indel spectra.
 
-Data from this analysis is included in the following publication:
-https://journals.biologists.com/dev/article/153/6/dev204881/371171/A-robust-cis-regulatory-network-ensures-Otx2
+**Purvis IJ, Ochoa Olmos OE, Park KU, Kaufman ML, Henry CM, Schaaf C, Clise OJ, Tesdahl CD, Haas A, Brzezinski JA IV.** A robust cis-regulatory network ensures *Otx2* expression during retinal development. *Development* **153**, dev204881 (2026).  
+[https://doi.org/10.1242/dev.204881](https://doi.org/10.1242/dev.204881)
 
-## Status: Completed
+---
 
-Start Date: 2025-07-30
+## Paper scope
 
-Hours spent:
+The methods describe deep amplicon sequencing of CRISPR-edited retinal cells, analyzed with CrispRVariants. Outcomes are reported in **Table S3**.
 
-## Project Notes
+| Target | Guides analyzed | Notes |
+|--------|-----------------|-------|
+| *Otx2* coding | g1, g2 | Positive control |
+| DHS2 | g1, g2 | |
+| DHS15 | g2 only | g1 amplicon failed |
+| Promoter / exon 1A | g2 only | g1 amplicon failed |
+| Promoter / exon 1B | g1, g2 | |
+| Promoter / exon 1C | g1, g2 | |
 
-### Investigators
+In total: **6 target regions**, **10 guide sequences** successfully analyzed (DHS15 g1 and promoter 1A g1 could not be amplified).
 
-Joseph Brzezinski IV, Principal Investigator
-<JOSEPH.BRZEZINSKI@CUANSCHUTZ.EDU>
+---
 
-Ian Purvis, Graduate Student
-<IAN.PURVIS@CUANSCHUTZ.EDU>
+## Repository contents
 
-### Background
-This project aims to analyze CRISPR editing outcomes using paired-end sequencing data. The `CrispRVariants` package is utilized to assess the efficiency of CRISPR editing at a specific target region in the mouse genome. The analysis will focus on identifying and quantifying indels (insertions and deletions) resulting from CRISPR editing for the revision of the A robust cis-regulatory network ensures Otx2 expression during retinal development manuscript.
+This repo holds the analysis pipeline and a subset of the sequencing data from the paper.
 
-### Hypothesis
+| sampleid | prefix | treatment |
+|----------|--------|-----------|
+| ControlDHS2 | ControlDHS2primers | Control |
+| ControlDHS15 | ControlDHS15primers | Control |
+| TestDHS15 | TestDHS15primers | Test |
 
-CRISPR editing will result in a higher frequency of indels at the target region compared to non-target regions.
+Primary analysis ([`analysis/01-CrispRVariants.qmd`](analysis/01-CrispRVariants.qmd)): TestDHS15 vs ControlDHS15 at the DHS15 locus (both guides; see [`analysis/comparisons.csv`](analysis/comparisons.csv)).
 
-### Samples
+**Guide RNA sequences** (PAM not included):
 
-  P0 mouse retina samples electroporated with CRISPR NHEJ expressing plasmid reagents targeting the Otx2 gene or enhancer regions
+| Target | Guide | Sequence |
+|--------|-------|----------|
+| DHS15 | g1 | `GCTGCCCCAGCCTTTCACAA` |
+| DHS15 | g2 | `TTTTCTTTTTTATTTAACCG` |
+| DHS2 | g1 | `CACCGACCCAGCTCTGGCAGATGGG` |
+| DHS2 | g2 | `ATTTTGAACCCCCTACAGAT` |
 
-| sampleid     | prefix              | treatment |
-|--------------|---------------------|-----------|
-| ControlDHS2  | ControlDHS2primers  | Control   |
-| ControlDHS15 | ControlDHS15primers | Control   |
-| TestDHS15    | TestDHS15primers    | Test      |
+**Amplicon primers**
 
-
-**guide RNA sequences used for CRISPR editing:**
-  
-DHS15 - g1 = GCTGCCCCAGCCTTTCACAA
-DHS15 - g2 = TTTTCTTTTTTATTTAACCG
-DHS2 - g1 = CACCGACCCAGCTCTGGCAGATGGG
-DHS2 - g2 = ATTTTGAACCCCCTACAGAT
-
-These sequences do not include the PAM sequence.
-
-**amplicon information:**
-
-For DHS15:
-Amplicon size = 437 bp
-Forward primer = GGTGTGCACCTCACCCGTGTTT
-Reverse primer = CACATCAAGCTGGAGGGCTGCA
-
-For DHS2:
-Amplicon size = 638 bp
-Forward primer = CCGAAGTGCCAGGAGGAAAGGC
-Reverse primer = ACCAAACCACACCACACCACACC
-
-### Raw Data
-
-Analysis Copy:  
-`https://github.com/MLKaufman/purvis-dev2025-crispr-outcomes/tree/main/raw_data`
-
-Investigator Copy:  
+DHS15 (437 bp): F `GGTGTGCACCTCACCCGTGTTT` · R `CACATCAAGCTGGAGGGCTGCA`  
+DHS2 (638 bp): F `CCGAAGTGCCAGGAGGAAAGGC` · R `ACCAAACCACACCACACCACACC`
 
 ---
 
 ## Analysis
 
-- Process and align paired-end sequencing FASTQ files using `bwa` and `samtools`
-- Use `CrispRVariants` to analyze CRISPR editing outcomes from the aligned BAM files
-- Identify and quantify indels at the target region
+- Align FASTQ files with `bwa` and `samtools` (mm39)
+- Quantify indels with `CrispRVariants`
+- Documents: [`analysis/01-CrispRVariants.qmd`](analysis/01-CrispRVariants.qmd), [`analysis/02-CrispRVariants_autoguide.qmd`](analysis/02-CrispRVariants_autoguide.qmd)
 
-### Notes
+### Outputs
 
-- mm39 genome build will be used for alignment
+- [Mutagenesis report (`01-CrispRVariants.html`)](analysis/outs/01-CrispRVariants/01-CrispRVariants.html)
+- [`analysis/variant_plot.pdf`](analysis/variant_plot.pdf)
 
----
+### Reproducing
 
-### Objectives
+```bash
+cd analysis
+Rscript -e "renv::restore()"
+quarto render 01-CrispRVariants.qmd
+```
 
-- Analyze CRISPR editing outcomes in mouse retina samples
-- Identify and quantify indels at the target region
-
-### Progress
-
-- [x] Install `CrispRVariants` package and preliminary setup
-- [x] Process paired-end sequencing FASTQ files
-- [ ] Generate detailed mutagenesis analysis report
-- [ ] Create coverage plots for each sample
-
-### Deliverables
-<https://github.com/MLKaufman/purvis-dev2025-crispr-outcomes/tree/main/analysis/outs/>
-
-- [ ] Mutagenesis analysis report `01-CrispRVariants.html`
-- [ ] files and/or coverage plots for each sample
-
-### Apps
+Reference genome files (`ref/mm39.fa`, GENCODE vM37 GTF) are not included; place them in `ref/` before rerunning.
 
 ---
 
-## Findings
+## References
 
-### Summary
-
-
-### Publication
-https://journals.biologists.com/dev/article/153/6/dev204881/371171/A-robust-cis-regulatory-network-ensures-Otx2
-
-### GEO Submission
-
----
-
-## References / Support
-
-https://www.bioconductor.org/packages/release/bioc/vignettes/CrispRVariants/inst/doc/user_guide.html
-
-https://github.com/markrobinsonuzh/CrispRVariants
-
-https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html
+- [CrispRVariants user guide](https://www.bioconductor.org/packages/release/bioc/vignettes/CrispRVariants/inst/doc/user_guide.html)
+- [CrispRVariants GitHub](https://github.com/markrobinsonuzh/CrispRVariants)
+- [CrispRVariants Bioconductor](https://bioconductor.org/packages/release/bioc/html/CrispRVariants.html)
