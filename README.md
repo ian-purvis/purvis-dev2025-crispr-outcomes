@@ -9,7 +9,7 @@ Canonical repository for the [`CrispRVariants`](https://bioconductor.org/package
 
 ## Paper scope
 
-The methods describe deep amplicon sequencing of CRISPR-edited retinal cells, analyzed with CrispRVariants. Outcomes are reported in **Table S3**.
+Amplicon sequencing of CRISPR-edited retinal cells, analyzed with CrispRVariants. Outcomes are reported in **Table S3**.
 
 | Target | Guides analyzed | Notes |
 |--------|-----------------|-------|
